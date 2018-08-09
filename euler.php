@@ -22,8 +22,8 @@
   </body>
   <script type="text/javascript">
   // Dynamic examples
-  var attitude = $.flightIndicator('#attitude', 'attitude', {roll:50, pitch:0, size:400, showBox : false});
-  var attitude2 = $.flightIndicator('#attitude2', 'attitude', {roll:0, pitch:-20, size:400, showBox : false});
+  var attitude = $.flightIndicator('#attitude', 'attitude', {roll:50, pitch:0, size:250, showBox : false});
+  var attitude2 = $.flightIndicator('#attitude2', 'attitude', {roll:0, pitch:-20, size:250, showBox : false});
   var heading = $.flightIndicator('#heading', 'heading', {heading:150, showBox:true});
   var variometer = $.flightIndicator('#variometer', 'variometer', {vario:-5, showBox:true});
   var airspeed = $.flightIndicator('#airspeed', 'airspeed', {showBox: false});
