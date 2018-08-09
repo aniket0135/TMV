@@ -4,46 +4,41 @@
     <meta charset="utf-8">
     <title>Data Through Raspberry</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/epoch/0.8.4/css/epoch.min.css">
+    <link rel="stylesheet" type="text/css" href="css/flightindicators.css" />
+    <link rel="stylesheet" type="text/css" href="css/showdata.css"/>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/epoch/0.7.1/js/epoch.min.js"></script> -->
+    <script src="http://d3js.org/d3.v5.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"> </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <script src="js/jquery.flightindicators.js"></script>
+    <script type="text/javascript" src=js/linegraph.js></script>
 
     <style>
-      /* Set the size of the div element that contains the map */
-      #map {
-        height: 400px;  /* The height is 400 pixels */
-        width: 80%;  /* The width is the width of the web page */
-       }
+      .chart-container {
+        width: 700px;
+        height: auto;
+      }
     </style>
-
   </head>
   <body>
-    <div class="container">
-      <div class="row">
-    <div class="col-md-10 col-md-offset-4">
-      <div style="font-size:24px;">
-        <span>Temperature = </span><span class="temp">NaN</span> &#176;<span>C</span>
-      </div>
-      <div  style="font-size:24px;">
-        <span>Humidity = </span><span class="hum">NaN</span> &#37;
-      </div>
+    <div class="chart-container">
+      <canvas id="mycanvas"></canvas>
     </div>
-    </div>
-  </div>
-  <h3>My Google Maps Demo</h3>
-  <div class="container">
-    <div class="row">
-  <div class="col-md-10 col-md-offset-4">
-    <div style="font-size:24px;">
+
+    <div class="containerlat">
       <span>Longitude = </span><span class="lng">NaN</span>
     </div>
-    <div  style="font-size:24px;">
+    <div class="containerlng">
       <span>Latitude = </span><span class="lat">NaN</span>
     </div>
-  </div>
-  </div>
-</div>
+    <div class="containertemp">
+      <span>TEMPERATURE = </span><span class="temp">NaN</span> &#176;<span>C</span>
+    </div>
+    <div class="containerhum">
+      <span>HUMIDITY = </span><span class="hum">NaN</span>&#37;
+    </div>
   <!--The div element for the map -->
   <script>
       function initMap(){}
@@ -97,8 +92,9 @@
 
       setInterval(ajax_call, interval);
   </script>
-    <div id="dvMap" style="width: 400px; height: 500px">
+    <div id="dvMap" style="width: 550px; height: 300px">
   </div>
+
 <script>
 var temp;
 var hum;
@@ -125,6 +121,48 @@ setInterval(ajax_call, interval);
 <script async defer
 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWq4CfMatw18beo0TUU3ACY9awFXmFOP0&callback=initMap">
 </script>
+<span id="attitude"></span>
+<span id="attitude2"></span>
+
+<span id="heading"></span>
+<span id="variometer"></span>
+<span id="airspeed"></span>
+<span id="altimeter"></span>
+<script type="text/javascript">
+// Dynamic examples
+var attitude = $.flightIndicator('#attitude', 'attitude', {roll:50, pitch:0, size:215, showBox : false});
+var attitude2 = $.flightIndicator('#attitude2', 'attitude', {roll:0, pitch:-20, size:215, showBox : false});
+var heading = $.flightIndicator('#heading', 'heading', {heading:150, showBox:true});
+var variometer = $.flightIndicator('#variometer', 'variometer', {vario:-5, showBox:true});
+var airspeed = $.flightIndicator('#airspeed', 'airspeed', {showBox: false});
+var altimeter = $.flightIndicator('#altimeter', 'altimeter');
+
+// Update at 20Hz
+var increment = 0;
+var i=0;
+var a  = [14, 15, 45, 32, 78, 56, 23, 12, 46];
+setInterval(function() {
+    // Attitude update
+      attitude.setRoll(50*Math.sin(increment/20));
+      //console.log(a[i]);
+    attitude2.setPitch(50*Math.sin(increment/20));
+
+    // Heading update
+    heading.setHeading(increment);
+
+    // Vario update
+    variometer.setVario(2*Math.sin(increment/10));
+
+    // Airspeed update
+    airspeed.setAirSpeed(80+80*Math.sin(increment/10));
+
+    // Altimeter update
+    altimeter.setAltitude(10*increment);
+    altimeter.setPressure(1000+3*Math.sin(increment/50));
+    increment++;
+    i++;
+});
+
+</script>
   </body>
-  <!-- <script type="text/javascript" src="graph.js"></script> -->
 </html>
