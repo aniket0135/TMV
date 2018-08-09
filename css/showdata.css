@@ -1,0 +1,26 @@
+
+.chart-container{
+  float:right;
+}
+
+.containertemp{
+  position: absolute;
+  top: 335px;
+  left: 700px;
+  font-size: 22px;
+}
+
+.containerhum{
+  position: absolute;
+  top: 335px;
+  left: 950px;
+  font-size: 22px;
+}
+
+.containerlat{
+  font-size: 22px;
+}
+
+.containerlng{
+  font-size: 22px;
+}
