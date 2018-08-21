@@ -1,20 +1,20 @@
 <?php
 include 'db.php';
-#$temp = $_GET['temp'];
-#$hum = $_GET['hum'];
+$temp = $_GET['temp'];
+$hum = $_GET['hum'];
 #$t=date("d-m-Y H:i:s");
-for($x=0;$x<100;$x++){
-  $t=rand(10,100);
-  $h=rand(10,100);
-  $sql = "INSERT INTO dht (temp, hum, date_time, cur_time) VALUES ('$t', '$h', now(), current_time() )";
+#for($x=0;$x<100;$x++){
+  #$t=rand(10,100);
+  #$h=rand(10,100);
+  $sql = "INSERT INTO dht (temp, hum, date_time, cur_time) VALUES ('$temp', '$hum', now(), current_time() )";
   if (mysqli_query($conn, $sql)) {
 
   }
   else {
       echo "Error: " . $sql . "<br>" . mysqli_error($conn);
   }
-  sleep(2);
-}
+  #sleep(2);
+#}
 
 /*if (mysqli_query($conn, $sql)) {
 echo "SUCCESS!";
