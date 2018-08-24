@@ -1,4 +1,10 @@
 import socket
+import datetime
+import threading
+import RPi.GPIO as GPIO
+import time
+import requests
+
 
 host = ''
 port = 5560
@@ -29,33 +35,31 @@ def REPEAT(dataMessage):
     reply = dataMessage[1]
     return reply
 
+def readSensor():
+    #h,t = dht.read_retry(dht.DHT22,20)
+    #print(t)
+    t=30.5
+    h=45.7
+    now = datetime.datetime.now().time()
+    temp = "%.1f" %t
+    hum = "%.1f" %h
+    print(temp)
+    print(hum)
+    payload = {"temp": temp, "hum": hum}
+    r = requests.get("http://192.168.31.142/TMV-master/savetemphum.php", params=payload)
+    #print(r.url)
+    print(r.status_code)
+
 def dataTransfer(conn):
     #Send/receive data
     while True:
         #Receive
-        data = conn.recv(1024) #Buffer size
-        data = data.decode('utf-8')
-        dataMessage = data.split(' ',1)
-        command = dataMessage[0]
-        if command == 'GET':
-            reply = GET()
-            print(reply)
-        elif command == 'REPEAT':
-            reply = REPEAT(dataMessage)
-            print(reply)
-        elif command == 'EXIT':
-            print("Client left")
-            break
-        elif command == 'KILL':
-            print("Connection closed")
-            s.close()
-        else:
-            reply = 'Unknown'
+        readSensor()
         #Send
-        conn.sendall(str.encode(reply))
         print("Data sent")
-        
+
     conn.close()
+
 
 s = setupServer()
 
