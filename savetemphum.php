@@ -1,7 +1,10 @@
 <?php
 include 'db.php';
+
+session_start();
 $temp = $_GET['temp'];
 $hum = $_GET['hum'];
+
 #$t=date("d-m-Y H:i:s");
 #for($x=0;$x<100;$x++){
   #$t=rand(10,100);
@@ -22,6 +25,8 @@ echo "SUCCESS!";
 else {
     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 }*/
+$_SESSION["temp"]=$temp;
+$_SESSION["hum"]=$hum;
 
 mysqli_close($conn);
 ?>

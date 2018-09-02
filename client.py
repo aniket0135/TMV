@@ -1,7 +1,7 @@
 import socket
 
-host = '192.168.31.74' #IP of Raspberry
-port = 5560
+host = '192.168.0.103' #IP of Raspberry
+port = 8888
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect((host, port))

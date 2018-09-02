@@ -7,7 +7,7 @@ import requests
 
 
 host = ''
-port = 5560
+port = 8888
 
 storedValue='YO B'
 
@@ -36,17 +36,17 @@ def REPEAT(dataMessage):
     return reply
 
 def readSensor():
-    #h,t = dht.read_retry(dht.DHT22,20)
+    h,t = dht.read_retry(dht.DHT22,20)
     #print(t)
-    t=30.5
-    h=45.7
-    now = datetime.datetime.now().time()
+    #t=30.5
+    #h=45.7
+    #now = datetime.datetime.now().time().replace(microsecond=0)
     temp = "%.1f" %t
     hum = "%.1f" %h
     print(temp)
     print(hum)
     payload = {"temp": temp, "hum": hum}
-    r = requests.get("http://192.168.31.142/TMV-master/savetemphum.php", params=payload)
+    r = requests.get("http://192.168.0.104/TMV-master/savetemphum.php", params=payload)
     #print(r.url)
     print(r.status_code)
 
