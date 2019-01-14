@@ -1,17 +1,4 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-    <style>
-      /* Set the size of the div element that contains the map */
-      #map {
-        height: 400px;  /* The height is 400 pixels */
-        width: 80%;  /* The width is the width of the web page */
-       }
-    </style>
-  </head>
-  <body>
     <h3>My Google Maps Demo</h3>
     <!--The div element for the map -->
     <script>
@@ -69,5 +56,3 @@
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWq4CfMatw18beo0TUU3ACY9awFXmFOP0&callback=initMap">
     </script>
-  </body>
-</html>
